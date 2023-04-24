@@ -1,17 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
 
 export default function App() {
 
   const [items, setItems] = useState(['Hello Andy']);
 
+  const addMore = (item) => {
+    console.log(item);
+    const newItem = item === 'Hello Andy' ? 'Hey' : 'How are you';
+    setItems(items => [...items, newItem]);
+  }
+
+  console.log('Hello App');
+
   return (
     <View style={styles.container}>
       <ActivityIndicator size={'large'} />
-      <TouchableOpacity>
-        <Text style ={styles.text}>HELLO Andy!</Text>
-      </TouchableOpacity>
+      <FlatList
+        data = {items}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => addMore(item)}>
+            <Text style ={styles.text}>{item}</Text>
+          </TouchableOpacity>
+        )}
+      />
       <StatusBar style="auto" />
     </View>
   );
@@ -23,6 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#222',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 50,
     gap: 20,
   },
   text: {
