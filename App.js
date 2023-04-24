@@ -16,6 +16,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={() => setItems(['Hello Andy'])}>
+        <Text style ={styles.text}>Refresh list</Text>
+      </TouchableOpacity>
       <ActivityIndicator size={'large'} />
       <FlatList
         data = {items}
