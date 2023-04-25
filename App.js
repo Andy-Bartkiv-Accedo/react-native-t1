@@ -1,51 +1,130 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import {
+  ActivityIndicator,
+  Button,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function App() {
+  const [inputText, setInputText] = useState("");
+  const [list, setList] = useState([]);
 
-  const [items, setItems] = useState(['Hello Andy']);
+  const textInputHandler = (enteredText) => {
+    setInputText(enteredText);
+  };
 
-  const addMore = (item) => {
-    console.log(item);
-    const newItem = item === 'Hello Andy' ? 'Hey' : 'How are you';
-    setItems(items => [...items, newItem]);
-  }
-
-  console.log('Hello App');
+  const addButtonHandler = () => {
+    setList((prevList) => [...prevList, inputText]);
+  };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => setItems(['Hello Andy'])}>
-        <Text style ={styles.text}>Refresh list</Text>
-      </TouchableOpacity>
-      <ActivityIndicator size={'large'} />
-      <FlatList
-        data = {items}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => addMore(item)}>
-            <Text style ={styles.text}>{item}</Text>
-          </TouchableOpacity>
-        )}
-      />
-      <StatusBar style="auto" />
+    <View style={styles.appContainer}>
+      {/* HEADER */}
+      <View style={styles.headerView}>
+        <Text style={styles.headerTitle}>Andy's App</Text>
+      </View>
+      {/* INPUT Container */}
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.inputText}
+          placeholderTextColor={"teal"}
+          placeholder="Your input"
+          onChangeText={textInputHandler}
+        />
+        <View style={styles.inputBtn}>
+          <Button title="Add" color="teal" onPress={addButtonHandler} />
+        </View>
+      </View>
+
+      {/* LIST Container */}
+      <View style={styles.listView}>
+        <Text style={styles.listTitle}>List of Items:</Text>
+        <ScrollView>
+          {list.map((item, index) => (
+            <Text key={index} style={styles.listText}>
+              {item}
+            </Text>
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  appContainer: {
     flex: 1,
-    backgroundColor: '#222',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 50,
-    gap: 20,
+    paddingTop: 40,
+    paddingHorizontal: 8,
+    backgroundColor: "#282c34",
   },
-  text: {
-    backgroundColor: '#234',
-    padding: 10,
+
+  headerView: {
+    backgroundColor: "#282c44",
+    padding: 8,
+    borderBottomWidth: 2,
+    borderBottomColor: "orange",
     borderRadius: 10,
-    color: 'orange',
-  }
+  },
+  headerTitle: {
+    textAlign: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    color: "orange",
+    fontSize: 28,
+    fontFamily: "serif",
+    fontStyle: "italic",
+  },
+
+  inputView: {
+    paddingHorizontal: 8,
+    paddingVertical: 16,
+    backgroundColor: "#282c44",
+    borderBottomWidth: 1,
+    borderBottomColor: "teal",
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  inputText: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "teal",
+    borderRadius: 4,
+    color: "#fa0d",
+    fontSize: 24,
+    marginRight: 8,
+    paddingHorizontal: 8,
+  },
+  inputBtn: {
+    flex: 0.25,
+  },
+
+  listView: {
+    flex: 1,
+  },
+  listTitle: {
+    fontSize: 24,
+    paddingVertical: 8,
+    color: "#eee",
+    textAlign: "center",
+  },
+  listText: {
+    marginVertical: 4,
+    paddingHorizontal: 4,
+    borderWidth: 1,
+    borderColor: "teal",
+    borderRadius: 4,
+    fontSize: 24,
+    color: "teal",
+  },
 });
