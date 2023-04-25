@@ -1,17 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import {
-  ActivityIndicator,
   Button,
   FlatList,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
-  Touchable,
-  TouchableOpacity,
   View,
 } from "react-native";
+
+import ListItem from "./components/ListItem";
 
 export default function App() {
   const [inputText, setInputText] = useState("");
@@ -47,13 +45,11 @@ export default function App() {
       {/* LIST Container */}
       <View style={styles.listView}>
         <Text style={styles.listTitle}>List of Items:</Text>
-        <ScrollView>
-          {list.map((item, index) => (
-            <Text key={index} style={styles.listText}>
-              {item}
-            </Text>
-          ))}
-        </ScrollView>
+        <FlatList
+          data={list}
+          keyExtractor={(item, index) => `id${index + item}`}
+          renderItem={(data) => <ListItem data={data} />}
+        />
       </View>
     </View>
   );
@@ -118,13 +114,5 @@ const styles = StyleSheet.create({
     color: "#eee",
     textAlign: "center",
   },
-  listText: {
-    marginVertical: 4,
-    paddingHorizontal: 4,
-    borderWidth: 1,
-    borderColor: "teal",
-    borderRadius: 4,
-    fontSize: 24,
-    color: "teal",
-  },
+
 });

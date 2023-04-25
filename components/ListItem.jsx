@@ -1,17 +1,24 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-const ListItem = () => {
+const ListItem = ({data}) => {
   return (
-    <Text>ListItem</Text>
+    <View>
+      <Text style={styles.listText}>
+        {`${data.index}. ${data.item}`}
+      </Text>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  appContainer: {
-    flex: 1,
-    paddingTop: 40,
-    paddingHorizontal: 8,
-    backgroundColor: '#282c34',
+  listText: {
+    marginVertical: 4,
+    paddingHorizontal: 4,
+    borderWidth: 1,
+    borderColor: "teal",
+    borderRadius: 4,
+    fontSize: 24,
+    color: "teal",
   },
 });
 
