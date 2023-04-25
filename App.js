@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import ListItem from "./components/ListItem";
+import MyInput from "./components/MyInput";
 
 export default function App() {
   const [inputText, setInputText] = useState("");
@@ -30,17 +31,10 @@ export default function App() {
         <Text style={styles.headerTitle}>Andy's App</Text>
       </View>
       {/* INPUT Container */}
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          placeholderTextColor={"teal"}
-          placeholder="Your input"
-          onChangeText={textInputHandler}
-        />
-        <View style={styles.inputBtn}>
-          <Button title="Add" color="teal" onPress={addButtonHandler} />
-        </View>
-      </View>
+      <MyInput
+        textInputHandler={textInputHandler}
+        addButtonHandler={addButtonHandler}
+      />
 
       {/* LIST Container */}
       <View style={styles.listView}>
@@ -80,31 +74,6 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 
-  inputView: {
-    paddingHorizontal: 8,
-    paddingVertical: 16,
-    backgroundColor: "#282c44",
-    borderBottomWidth: 1,
-    borderBottomColor: "teal",
-    borderRadius: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  inputText: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: "teal",
-    borderRadius: 4,
-    color: "#fa0d",
-    fontSize: 24,
-    marginRight: 8,
-    paddingHorizontal: 8,
-  },
-  inputBtn: {
-    flex: 0.25,
-  },
-
   listView: {
     flex: 1,
   },
@@ -114,5 +83,4 @@ const styles = StyleSheet.create({
     color: "#eee",
     textAlign: "center",
   },
-
 });
