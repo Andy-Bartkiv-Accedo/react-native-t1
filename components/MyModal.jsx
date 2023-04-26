@@ -1,10 +1,12 @@
-import { useState } from "react";
 import { StyleSheet, Text, View, Button, Modal } from "react-native";
 
-const MyModal = ({toggle}) => {
+const MyModal = ({text, toggle, action, data}) => {
 
-  const onPressHandler = () => {
-    console.log('button');
+  const onPressYes = () => {
+    action(data.id)
+    toggle();
+  };
+  const onPressNo = () => {
     toggle();
   };
   
@@ -13,14 +15,14 @@ const MyModal = ({toggle}) => {
       <View style={styles.modalView}>
         <View style={styles.modalContainer}>
           <View style={styles.textView}>
-            <Text style={styles.modalText}>ARE YOU SURE</Text>
+            <Text style={styles.modalText}>{text}</Text>
           </View>
           <View style={styles.buttonsView}>
             <View style={styles.button}>
-              <Button title="No" color="red" onPress={onPressHandler} />
+              <Button title="No" color="#fa09" onPress={onPressNo} />
             </View>
             <View style={styles.button}>
-              <Button title="Yes" color="green" onPress={onPressHandler} />
+              <Button title="Yes" color="#088b" onPress={onPressYes} />
             </View>
           </View>
         </View>
@@ -42,7 +44,9 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: "#282c44",
-    borderWidth: 2,
+    // borderWidth: 2,
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
     borderColor: "teal",
     borderRadius: 8,
     height: '25%',
@@ -55,6 +59,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalText: {
+    textAlign: 'center',
     color: "#fa0d",
     fontSize: 24,
     paddingHorizontal: 8,

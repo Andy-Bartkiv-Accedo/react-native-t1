@@ -1,9 +1,9 @@
-import { StyleSheet, Button, Text, View, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 
 
 const ListItem = ({data, onDelete}) => {
+  
   const deleteItemHandler = () => {
-    console.log(data.index);
     onDelete(data.index);
   }
 

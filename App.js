@@ -1,11 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 
 import ListItem from "./components/ListItem";
 import MyInput from "./components/MyInput";
@@ -13,35 +8,49 @@ import MyModal from "./components/MyModal";
 
 export default function App() {
   const [list, setList] = useState([]);
+  const [deleteId, setDeleteId] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  const toggleModal = () => setShowModal((prevState) => !prevState);
+
   const addButtonHandler = (inputText) => {
-    toggleModal();
-    // setList((prevList) => [...prevList, inputText]);
+    setList((prevList) => [...prevList, inputText]);
   };
 
-  const toggleModal = () => setShowModal(prevState => !prevState);
+  const deleteSingleItem = (itemId) => {
+    setList((prevList) => prevList.filter((item, index) => index !== itemId));
+  }
 
   const deleteItemHandler = (itemId) => {
-    setList(prevList => 
-      prevList.filter((item, index) => index !== itemId));
+    setDeleteId(itemId);
+    const itemText = list.find((item, index) => index === itemId);
+    if (itemText !== "") {
+      toggleModal();
+    } else {
+      deleteSingleItem(itemId);
+    }
   };
 
-  const listTitle = list.length > 0 ? 'List of Items:' : 'No Items to show...'
+  const listTitle = list.length > 0 ? "List of Items:" : "No Items to show...";
 
   return (
     <>
-      <StatusBar style='light'/>
+      <StatusBar style="light" />
       <View style={styles.appContainer}>
-        {showModal && <MyModal toggle={toggleModal}/>}
+        {showModal && (
+          <MyModal
+            text={"This Item is not empty.\nDelete anyway?"}
+            toggle={toggleModal}
+            action={deleteSingleItem}
+            data={{id: deleteId}}
+          />
+        )}
         {/* HEADER */}
         <View style={styles.headerView}>
           <Text style={styles.headerTitle}>Andy's App</Text>
         </View>
         {/* INPUT Container */}
-        <MyInput
-          addButtonHandler={addButtonHandler}
-        />
+        <MyInput addButtonHandler={addButtonHandler} />
 
         {/* LIST Container */}
         <View style={styles.listView}>
@@ -49,10 +58,9 @@ export default function App() {
           <FlatList
             data={list}
             keyExtractor={(item, index) => `id${index + item}`}
-            renderItem={(data) => 
-              <ListItem data={data} 
-                onDelete = {deleteItemHandler}
-              />}
+            renderItem={(data) => (
+              <ListItem data={data} onDelete={deleteItemHandler} />
+            )}
           />
         </View>
       </View>
