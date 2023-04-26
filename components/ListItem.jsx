@@ -11,11 +11,13 @@ const ListItem = ({data, onDelete}) => {
     <View style={styles.itemView}>
 
       <Text style={styles.itemText}>
-        {`${data.index}. ${data.item}`}
+        {`${data.index + 1}. ${data.item}`}
       </Text>
       
-      <Pressable onPress={deleteItemHandler}>
-        <Text style={styles.itemDeleteBtn} >X</Text>
+      <Pressable onPress={deleteItemHandler}
+        style={({ pressed }) => pressed && styles.pressedBtn}
+      >
+        <Text style={styles.itemDeleteBtn}>X</Text>
       </Pressable>
     </View>
   )
@@ -43,6 +45,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
     fontSize: 16,
     color: 'orange',
+  },
+  pressedBtn: {
+    borderColor: 'orange',
+    borderWidth: 1,
+    borderRadius: 4,
   },
 
 });
