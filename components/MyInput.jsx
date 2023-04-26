@@ -14,13 +14,13 @@ const MyInput = ({ addButtonHandler }) => {
     <View style={styles.inputView}>
       <TextInput
         style={styles.inputText}
-        placeholderTextColor={"teal"}
-        placeholder="Your input"
+        placeholderTextColor={"#0888"}
+        placeholder="Your input..."
         value={inputText}
         onChangeText={setInputText}
       />
       <View style={styles.inputBtn}>
-        <Button title="Add" color="teal" onPress={onPressHandler} />
+        <Button title="Add" color="#0888" onPress={onPressHandler} />
       </View>
     </View>
   );

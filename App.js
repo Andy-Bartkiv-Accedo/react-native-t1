@@ -17,6 +17,13 @@ export default function App() {
     setList((prevList) => [...prevList, inputText]);
   };
 
+  const deleteItemHandler = (itemId) => {
+    setList(prevList => 
+      prevList.filter((item, index) => index !== itemId));
+  };
+
+  const listTitle = list.length > 0 ? 'List of Items:' : 'No Items to show...'
+
   return (
     <View style={styles.appContainer}>
       {/* HEADER */}
@@ -30,11 +37,14 @@ export default function App() {
 
       {/* LIST Container */}
       <View style={styles.listView}>
-        <Text style={styles.listTitle}>List of Items:</Text>
+        <Text style={styles.listTitle}>{listTitle}</Text>
         <FlatList
           data={list}
           keyExtractor={(item, index) => `id${index + item}`}
-          renderItem={(data) => <ListItem data={data} />}
+          renderItem={(data) => 
+            <ListItem data={data} 
+              onDelete = {deleteItemHandler}
+            />}
         />
       </View>
     </View>
