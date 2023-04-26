@@ -1,17 +1,16 @@
 import { StyleSheet, Text, View, Button, Modal } from "react-native";
 
-const MyModal = ({text, toggle, action, data}) => {
-
+const MyModal = ({ visible, text, toggle, action, data }) => {
   const onPressYes = () => {
-    action(data.id)
+    action(data.id);
     toggle();
   };
   const onPressNo = () => {
     toggle();
   };
-  
+
   return (
-    <Modal animationType='fade' transparent={true}>
+    <Modal visible={visible} animationType="fade" transparent={true}>
       <View style={styles.modalView}>
         <View style={styles.modalContainer}>
           <View style={styles.textView}>
@@ -27,7 +26,6 @@ const MyModal = ({text, toggle, action, data}) => {
           </View>
         </View>
       </View>
-
     </Modal>
   );
 };
@@ -38,8 +36,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 16,
     backgroundColor: "#282c34cc",
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
   },
   modalContainer: {
@@ -49,30 +47,30 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderColor: "teal",
     borderRadius: 8,
-    height: '25%',
-    width: '80%',
-    justifyContent: 'space-evenly',
+    height: "25%",
+    width: "80%",
+    justifyContent: "space-evenly",
   },
   textView: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   modalText: {
-    textAlign: 'center',
+    textAlign: "center",
     color: "#fa0d",
     fontSize: 24,
     paddingHorizontal: 8,
   },
   buttonsView: {
-    width: '100%',
+    width: "100%",
     flexDirection: "row",
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
+    justifyContent: "space-evenly",
+    alignItems: "center",
   },
   button: {
-    flex: .25,
-  }
+    flex: 0.25,
+  },
 });
 
 export default MyModal;

@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Keyboard, StyleSheet, Text, View } from "react-native";
 
 import ListItem from "./components/ListItem";
 import MyInput from "./components/MyInput";
@@ -15,6 +15,7 @@ export default function App() {
 
   const addButtonHandler = (inputText) => {
     setList((prevList) => [...prevList, inputText]);
+    Keyboard.dismiss();
   };
 
   const deleteSingleItem = (itemId) => {
@@ -37,14 +38,13 @@ export default function App() {
     <>
       <StatusBar style="light" />
       <View style={styles.appContainer}>
-        {showModal && (
-          <MyModal
-            text={"This Item is not empty.\nDelete anyway?"}
-            toggle={toggleModal}
-            action={deleteSingleItem}
-            data={{id: deleteId}}
-          />
-        )}
+        <MyModal
+          visible={showModal}
+          text={"This Item is not empty.\nDelete anyway?"}
+          toggle={toggleModal}
+          action={deleteSingleItem}
+          data={{id: deleteId}}
+        />
         {/* HEADER */}
         <View style={styles.headerView}>
           <Text style={styles.headerTitle}>Andy's App</Text>
