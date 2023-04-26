@@ -1,20 +1,30 @@
-import { StyleSheet, TextInput, View, Button } from 'react-native';
+import { useState } from "react";
+import { StyleSheet, TextInput, View, Button } from "react-native";
 
-const MyInput = ({addButtonHandler, textInputHandler}) => {
+const MyInput = ({ addButtonHandler }) => {
+
+  const [inputText, setInputText] = useState("");
+  
+  const onPressHandler = () => {
+    setInputText('');
+    addButtonHandler(inputText);
+  };
+  
   return (
     <View style={styles.inputView}>
       <TextInput
         style={styles.inputText}
         placeholderTextColor={"teal"}
         placeholder="Your input"
-        onChangeText={textInputHandler}
+        value={inputText}
+        onChangeText={setInputText}
       />
       <View style={styles.inputBtn}>
-        <Button title="Add" color="teal" onPress={addButtonHandler} />
+        <Button title="Add" color="teal" onPress={onPressHandler} />
       </View>
-  </View>
-  )
-}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   inputView: {
@@ -40,8 +50,7 @@ const styles = StyleSheet.create({
   },
   inputBtn: {
     flex: 0.25,
-    borderRadius: 10,
   },
 });
 
-export default MyInput
+export default MyInput;

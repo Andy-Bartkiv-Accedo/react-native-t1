@@ -1,11 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import {
-  Button,
   FlatList,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from "react-native";
 
@@ -13,14 +11,9 @@ import ListItem from "./components/ListItem";
 import MyInput from "./components/MyInput";
 
 export default function App() {
-  const [inputText, setInputText] = useState("");
   const [list, setList] = useState([]);
 
-  const textInputHandler = (enteredText) => {
-    setInputText(enteredText);
-  };
-
-  const addButtonHandler = () => {
+  const addButtonHandler = (inputText) => {
     setList((prevList) => [...prevList, inputText]);
   };
 
@@ -32,7 +25,6 @@ export default function App() {
       </View>
       {/* INPUT Container */}
       <MyInput
-        textInputHandler={textInputHandler}
         addButtonHandler={addButtonHandler}
       />
 

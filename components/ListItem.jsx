@@ -13,7 +13,7 @@ const ListItem = ({data}) => {
 const styles = StyleSheet.create({
   listText: {
     marginVertical: 4,
-    paddingHorizontal: 4,
+    paddingHorizontal: 8,
     borderWidth: 1,
     borderColor: "teal",
     borderRadius: 4,
