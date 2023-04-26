@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, Modal } from "react-native";
+import { StyleSheet, Text, View, Button, Modal, Image } from "react-native";
 
 const MyModal = ({ visible, text, toggle, action, data }) => {
   const onPressYes = () => {
@@ -20,6 +20,7 @@ const MyModal = ({ visible, text, toggle, action, data }) => {
             <View style={styles.button}>
               <Button title="No" color="#fa09" onPress={onPressNo} />
             </View>
+            <Image style={styles.image} source={require('../assets/images/goal.png')}/>
             <View style={styles.button}>
               <Button title="Yes" color="#088b" onPress={onPressYes} />
             </View>
@@ -42,7 +43,6 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: "#282c44",
-    // borderWidth: 2,
     borderBottomWidth: 2,
     borderTopWidth: 2,
     borderColor: "teal",
@@ -50,6 +50,12 @@ const styles = StyleSheet.create({
     height: "25%",
     width: "80%",
     justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+  image: {
+    resizeMode: 'center',
+    width: 36,
+    height: 36,
   },
   textView: {
     width: "100%",
