@@ -1,25 +1,34 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
+const ListItem = ({data, onDelete }) => {
 
-const ListItem = ({data, onDelete}) => {
+  const navigation = useNavigation();
+
+  console.log(data);
+
+  onItemPress = () => navigation.navigate('Details', {id: data.index, text: data.item});
   
   const deleteItemHandler = () => {
     onDelete(data.index);
   }
 
   return (
-    <View style={styles.itemView}>
+    <Pressable onPress={onItemPress}>
+      <View style={styles.itemView}>
 
-      <Text style={styles.itemText}>
-        {`${data.index + 1}. ${data.item}`}
-      </Text>
-      
-      <Pressable onPress={deleteItemHandler}
-        style={({ pressed }) => pressed && styles.pressedBtn}
-      >
-        <Text style={styles.itemDeleteBtn}>X</Text>
-      </Pressable>
-    </View>
+        <Text style={styles.itemText}>
+          {`${data.index + 1}. ${data.item}`}
+        </Text>
+        
+        <Pressable onPress={deleteItemHandler}
+          style={({ pressed }) => pressed && styles.pressedBtn}
+        >
+          <Text style={styles.itemDeleteBtn}>X</Text>
+        </Pressable>
+      </View>
+
+    </Pressable>
   )
 }
 
