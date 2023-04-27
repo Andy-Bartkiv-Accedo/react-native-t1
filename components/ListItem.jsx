@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const ListItem = ({ data, onDelete }) => {
   const navigation = useNavigation();
@@ -18,9 +19,13 @@ const ListItem = ({ data, onDelete }) => {
 
         <Pressable
           onPress={deleteItemHandler}
-          style={({ pressed }) => pressed && styles.pressedBtn}
+          style={({ pressed }) => [
+            styles.itemDeleteBtn,
+            pressed && styles.pressedBtn,
+          ]}
         >
-          <Text style={styles.itemDeleteBtn}>X</Text>
+          {/* <Text style={styles.itemDeleteBtn}>X</Text> */}
+          <Ionicons name="trash" size={20} color="#fa0d" />
         </Pressable>
       </View>
     </Pressable>
@@ -40,14 +45,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
   },
   itemText: {
+    flex: 1,
     fontSize: 24,
     color: "teal",
+    marginRight: 4,
   },
   itemDeleteBtn: {
     backgroundColor: "#0886",
     borderRadius: 4,
-    paddingHorizontal: 6,
-    fontSize: 16,
+    paddingHorizontal: 4,
     color: "orange",
   },
   pressedBtn: {

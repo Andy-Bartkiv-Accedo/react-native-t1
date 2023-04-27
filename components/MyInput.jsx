@@ -28,7 +28,7 @@ const MyInput = ({ addButtonHandler }) => {
 
 const styles = StyleSheet.create({
   inputView: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 10,
     paddingVertical: 16,
     backgroundColor: "#282c44",
     borderBottomWidth: 1,

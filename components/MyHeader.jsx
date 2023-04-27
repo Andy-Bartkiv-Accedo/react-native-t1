@@ -10,7 +10,7 @@ const MyHeader = () => {
 
 const styles = StyleSheet.create({
   headerView: {
-    flex: .97,
+    flex: .96,
     backgroundColor: "#282c44",
     padding: 8,
     borderBottomWidth: 2,
