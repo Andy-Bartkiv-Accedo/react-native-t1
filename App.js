@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from "./screens/Home";
 import Details from './screens/Details';
+import MyHeader from "./components/MyHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,10 +13,17 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
+        <Stack.Navigator screenOptions={{
+            headerStyle: { backgroundColor: "#282c44" },
+            headerTintColor: 'orange',
+            contentStyle: { backgroundColor: "#282c34" },
+
+        }}>
+          <Stack.Screen name="Home" component={Home} options={{
+            headerTitle: (props) => <MyHeader {...props} />
+          }}/>
           <Stack.Screen name="Details" component={Details} />
         </Stack.Navigator>
       </NavigationContainer>

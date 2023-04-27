@@ -4,6 +4,7 @@ import { FlatList, Keyboard, StyleSheet, Text, View } from "react-native";
 import ListItem from "../components/ListItem";
 import MyInput from "../components/MyInput";
 import MyModal from "../components/MyModal";
+import MyHeader from "../components/MyHeader";
 
 export default function Home({ navigation }) {
   const [list, setList] = useState([]);
@@ -44,9 +45,9 @@ export default function Home({ navigation }) {
           data={{ id: deleteId }}
         />
         {/* HEADER */}
-        <View style={styles.headerView}>
+        {/* <View style={styles.headerView}>
           <Text style={styles.headerTitle}>Andy's App</Text>
-        </View>
+        </View> */}
         {/* INPUT Container */}
         <MyInput addButtonHandler={addButtonHandler} />
 
@@ -72,7 +73,6 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    // paddingTop: 40,
     paddingHorizontal: 8,
   },
 

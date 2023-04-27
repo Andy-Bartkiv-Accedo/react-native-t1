@@ -1,36 +1,31 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const ListItem = ({data, onDelete }) => {
-
+const ListItem = ({ data, onDelete }) => {
   const navigation = useNavigation();
 
-  console.log(data);
+  onItemPress = () =>
+    navigation.navigate("Details", { id: data.index, text: data.item });
 
-  onItemPress = () => navigation.navigate('Details', {id: data.index, text: data.item});
-  
   const deleteItemHandler = () => {
     onDelete(data.index);
-  }
+  };
 
   return (
     <Pressable onPress={onItemPress}>
       <View style={styles.itemView}>
+        <Text style={styles.itemText}>{`${data.index + 1}. ${data.item}`}</Text>
 
-        <Text style={styles.itemText}>
-          {`${data.index + 1}. ${data.item}`}
-        </Text>
-        
-        <Pressable onPress={deleteItemHandler}
+        <Pressable
+          onPress={deleteItemHandler}
           style={({ pressed }) => pressed && styles.pressedBtn}
         >
           <Text style={styles.itemDeleteBtn}>X</Text>
         </Pressable>
       </View>
-
     </Pressable>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   itemView: {
@@ -53,14 +48,13 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingHorizontal: 6,
     fontSize: 16,
-    color: 'orange',
+    color: "orange",
   },
   pressedBtn: {
-    borderColor: 'orange',
+    borderColor: "orange",
     borderWidth: 1,
     borderRadius: 4,
   },
-
 });
 
 export default ListItem;
